@@ -8,6 +8,9 @@
     },
     "author": "kjx63",
     "license": "ISC",
+    "engines": {
+        "node": "12.16.2"
+    },
     "dependencies": {
         "async": "^3.2.0",
         "body-parser": "^1.19.0",
