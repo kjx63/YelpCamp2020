@@ -19,9 +19,10 @@ const campgroundRoutes = require('./routes/campgrounds');
 const commentRoutes = require('./routes/comments');
 const indexRoutes = require('./routes/index');
 
+const mongodbPassword = process.env.MONGODBPW
 
-mongoose.connect("mongodb://localhost:27017/YelpCampLocalDB", { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-    console.log('Successfully Connected to Local MongoDB');
+mongoose.connect(`mongodb+srv://Kenji:${mongodbPassword}@cluster0-ytudd.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+    console.log('Successfully Connected to MongoDB Atlas');
 }).catch(err => console.log(err));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -64,7 +65,8 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 
 // AUTH ROUTES
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log('The YelpCamp Server Has Started!');
-});
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 8000;
+}
+app.listen(port);
